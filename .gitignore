@@ -1,0 +1,14 @@
+/haiku-day/node_modules/**/*
+/haiku-day/.expo/*
+/haiku-day/npm-debug.*
+/haiku-day/*.jks
+/haiku-day/*.p8
+/haiku-day/*.p12
+/haiku-day/*.key
+/haiku-day/*.mobileprovision
+/haiku-day/*.orig.*
+/haiku-day/web-build/
+/haiku-day/.eslintcache
+
+# macOS
+/haiku-day/.DS_Store
