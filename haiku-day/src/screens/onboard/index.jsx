@@ -1,17 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Image } from 'react-native'
 import Onboarding from 'react-native-onboarding-swiper'
 import { useTheme } from '@react-navigation/native'
-import { OnboardContext } from '../../helpers/context'
+import { finishOnboard } from '../../helpers/constants'
 import notif from '~/assets/images/notif-onboard.png'
 import programer from '~/assets/images/schedule-onboard.png'
 import positive from '~/assets/images/positive-onboard.png'
 
-const Onboard = () => {
-  const { setShowOnboard } = useContext(OnboardContext)
+const Onboard = ({ navigation }) => {
   const { colors } = useTheme()
   const handleClick = () => {
-    setShowOnboard(false)
+    finishOnboard()
+    navigation.navigate('Home')
   }
   return (
     <Onboarding

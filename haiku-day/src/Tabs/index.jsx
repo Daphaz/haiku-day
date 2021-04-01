@@ -6,10 +6,11 @@ import { prefix } from '~/helpers/constants'
 
 import NavigationHome from '~/screens/home'
 import NavigationHistory from '~/screens/history'
+import Onboarding from '~/screens/onboard'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
-const TabsNavigation = () => {
+const TabsNavigation = ({ setTheme, theme }) => {
   const colors = useColorScheme()
   prefix()
   return (
@@ -40,8 +41,8 @@ const TabsNavigation = () => {
       }}
       initialRouteName="Home"
     >
-      <Screen name="Home" component={NavigationHome} />
-      <Screen name="History" component={NavigationHistory} />
+      <Screen name="Home">{(props) => <NavigationHome {...props} setTheme={setTheme} theme={theme} />}</Screen>
+      <Screen name="History">{(props) => <NavigationHistory {...props} setTheme={setTheme} theme={theme} />}</Screen>
     </Navigator>
   )
 }

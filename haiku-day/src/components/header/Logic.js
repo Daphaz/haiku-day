@@ -1,24 +1,21 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState } from 'react'
 import { useTheme } from '@react-navigation/native'
-import { ThemeContext } from '~/helpers/context'
+import { setThemeLocal } from '~/helpers/constants'
 
-const Logic = () => {
+const Logic = (setTheme, theme) => {
   const { colors } = useTheme()
   const [isEnabled, setIsEnabled] = useState(false)
-  const { theme, setTheme } = useContext(ThemeContext)
-
-  useEffect(() => {
-    if (theme == 'light') {
-      setIsEnabled(false)
-    } else {
-      setIsEnabled(true)
-    }
-  }, [theme])
 
   const toggleSwitch = () => {
-    const themeColor = theme === 'light' ? 'dark' : 'light'
-    // setIsEnabled(!isEnabled)
-    setTheme(themeColor)
+    setTheme((prevState) => (prevState === 'light' ? 'dark' : 'light'))
+    setIsEnabled(!isEnabled)
+    if (theme === 'no-preference') {
+      setThemeLocal('light')
+    } else if (theme === 'light') {
+      setThemeLocal('dark')
+    } else {
+      setThemeLocal('light')
+    }
   }
   return {
     colors,

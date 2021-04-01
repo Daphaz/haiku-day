@@ -13,8 +13,8 @@ export const HeaderLeft = () => {
   )
 }
 
-export const HeaderRight = () => {
-  const { colors, isEnabled, toggleSwitch } = Logic()
+export const HeaderRight = ({ setTheme, theme }) => {
+  const { colors, isEnabled, toggleSwitch } = Logic(setTheme, theme)
   return (
     <View style={[styles.headerRight]}>
       <Ionicons color={colors.text} name={prefix('sunny')} style={styles.iconRight} size={16} />

@@ -5,7 +5,7 @@ import { HeaderLeft, HeaderRight } from '~/components/header'
 
 const { Navigator, Screen } = createStackNavigator()
 
-const Home = () => {
+const Home = ({ setTheme, theme }) => {
   return (
     <Navigator
       initialRouteName="HomePage"
@@ -13,7 +13,7 @@ const Home = () => {
         headerTransparent: true,
         headerTitle: '',
         headerLeft: () => <HeaderLeft />,
-        headerRight: () => <HeaderRight />,
+        headerRight: () => <HeaderRight setTheme={setTheme} theme={theme} />,
       }}
     >
       <Screen name="HomePage" component={Homepage} />
