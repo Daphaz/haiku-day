@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { createStackNavigator } from '@react-navigation/stack'
 import NavigationTab from './src/Tabs'
 import Onboarding from './src/screens/onboard'
@@ -17,6 +18,12 @@ const Navigation = ({ initialScreen, setTheme, theme }) => {
       <Screen name="Onboarding" component={Onboarding} />
     </Navigator>
   )
+}
+
+Navigation.propTypes = {
+  initialScreen: PropTypes.string.isRequired,
+  setTheme: PropTypes.string.isRequired,
+  theme: PropTypes.func.isRequired,
 }
 
 export default Navigation

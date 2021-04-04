@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Switch } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { prefix } from '~/helpers/constants'
@@ -27,6 +28,10 @@ export const HeaderRight = ({ setTheme, theme }) => {
       />
     </View>
   )
+}
+HeaderRight.propTypes = {
+  setTheme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
 }
 
 const styles = StyleSheet.create({

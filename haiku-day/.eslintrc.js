@@ -16,5 +16,4 @@ module.exports = {
   rules: {
     'no-console': 'error',
   },
-  'prettier/prettier': ['error', { singleQuote: true, parser: 'flow' }],
 }

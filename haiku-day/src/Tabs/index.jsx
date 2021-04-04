@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import { useColorScheme } from 'react-native'
@@ -6,16 +8,15 @@ import { prefix } from '~/helpers/constants'
 
 import NavigationHome from '~/screens/home'
 import NavigationHistory from '~/screens/history'
-import Onboarding from '~/screens/onboard'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
 const TabsNavigation = ({ setTheme, theme }) => {
   const colors = useColorScheme()
-  prefix()
   return (
     <Navigator
       screenOptions={({ route }) => ({
+        // eslint-disable-next-line react/display-name
         tabBarIcon: ({ focused, color, size }) => {
           let iconName
           switch (route.name) {
@@ -45,6 +46,11 @@ const TabsNavigation = ({ setTheme, theme }) => {
       <Screen name="History">{(props) => <NavigationHistory {...props} setTheme={setTheme} theme={theme} />}</Screen>
     </Navigator>
   )
+}
+
+TabsNavigation.propTypes = {
+  setTheme: PropTypes.string.isRequired,
+  theme: PropTypes.func.isRequired,
 }
 
 export default TabsNavigation

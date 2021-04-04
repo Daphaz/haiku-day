@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Image } from 'react-native'
 import Onboarding from 'react-native-onboarding-swiper'
 import { useTheme } from '@react-navigation/native'
@@ -41,6 +42,10 @@ const Onboard = ({ navigation }) => {
       ]}
     />
   )
+}
+
+Onboard.propTypes = {
+  navigation: PropTypes.object.isRequired,
 }
 
 export default Onboard

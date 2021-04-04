@@ -32,6 +32,7 @@ export default function App() {
         setLoading(false)
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error)
     }
   }

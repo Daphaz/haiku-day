@@ -20,6 +20,7 @@ export const renderInitialScreen = async () => {
     const onBoard = await AsyncStorage.getItem('onBoard')
     return onBoard ? 'Home' : 'Onboarding'
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error('erreur initial screen', e)
   }
 }
@@ -33,6 +34,7 @@ export const renderTheme = async (colorScheme) => {
     const theme = await AsyncStorage.getItem('theme')
     return theme ? theme : colorScheme
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error('erreur render Theme', e)
   }
 }
