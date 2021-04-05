@@ -22,8 +22,8 @@ const Navigation = ({ initialScreen, setTheme, theme }) => {
 
 Navigation.propTypes = {
   initialScreen: PropTypes.string.isRequired,
-  setTheme: PropTypes.string.isRequired,
-  theme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+  setTheme: PropTypes.func.isRequired,
 }
 
 export default Navigation

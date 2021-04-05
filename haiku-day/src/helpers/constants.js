@@ -38,3 +38,27 @@ export const renderTheme = async (colorScheme) => {
     console.error('erreur render Theme', e)
   }
 }
+
+export const saveAutoMode = async (date) => {
+  await AsyncStorage.setItem('mode', 'auto')
+  await AsyncStorage.setItem('date', date)
+}
+
+export const getMode = async () => {
+  try {
+    const mode = await AsyncStorage.getItem('mode')
+    const date = await AsyncStorage.getItem('date')
+    return {
+      mode: mode ? true : false,
+      date: date ? parseInt(date) : '',
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('erreur getMode', e)
+  }
+}
+
+export const removeMode = async () => {
+  await AsyncStorage.removeItem('mode')
+  await AsyncStorage.removeItem('date')
+}

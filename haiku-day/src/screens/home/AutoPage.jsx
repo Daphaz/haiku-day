@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { timeFormat } from '~/helpers/dateFormated'
+import { saveAutoMode } from '../../helpers/constants'
 
 import ReturnBtn from '~/components/ReturnBtn'
 import Btn from '../../components/Btn'
@@ -15,9 +16,9 @@ const AutoPage = ({ navigation }) => {
   const [date, setDate] = useState(new Date())
 
   const onChange = (event, selectedDate) => {
+    setShow(false)
     const currentDate = selectedDate || date
     setDate(currentDate)
-    setShow(false)
   }
 
   const handleShowTimePiker = () => {
@@ -25,10 +26,8 @@ const AutoPage = ({ navigation }) => {
   }
 
   const onSubmit = () => {
-    navigation.navigate('HomePage', {
-      automatic: true,
-      date: Date.parse(date),
-    })
+    saveAutoMode(Date.parse(date).toString())
+    navigation.navigate('HomePage', true)
   }
 
   return (
