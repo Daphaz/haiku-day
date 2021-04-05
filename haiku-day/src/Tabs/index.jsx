@@ -49,8 +49,8 @@ const TabsNavigation = ({ setTheme, theme }) => {
 }
 
 TabsNavigation.propTypes = {
-  setTheme: PropTypes.string.isRequired,
-  theme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+  setTheme: PropTypes.func.isRequired,
 }
 
 export default TabsNavigation

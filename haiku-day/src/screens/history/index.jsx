@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -13,8 +14,8 @@ const History = ({ setTheme, theme }) => {
       screenOptions={{
         headerTransparent: true,
         headerTitle: '',
-        headerLeft: <HeaderLeft />,
-        headerRight: <HeaderRight setTheme={setTheme} theme={theme} />,
+        headerLeft: () => <HeaderLeft />,
+        headerRight: () => <HeaderRight setTheme={setTheme} theme={theme} />,
       }}
     >
       <Screen name="HistoryPage" component={HistoryPage} />
