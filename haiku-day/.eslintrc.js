@@ -15,5 +15,11 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'no-console': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 }
