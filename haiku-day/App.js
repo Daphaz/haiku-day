@@ -3,6 +3,7 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native'
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance'
 import { NavigationContainer } from '@react-navigation/native'
 import * as Font from 'expo-font'
+import * as Permissions from 'expo-permissions'
 import { DefaultTheme, DarkTheme } from './src/theme'
 import Navigation from './Navigation'
 import { renderInitialScreen, renderTheme } from './src/helpers/constants'
@@ -13,7 +14,7 @@ export default function App() {
   const [initialScreen, setInitialScreen] = useState('Login')
   const [theme, setTheme] = useState()
 
-  const loadFont = async () => {
+  const loadItems = async () => {
     try {
       const result = await new Promise.all([
         Font.loadAsync({
@@ -23,10 +24,12 @@ export default function App() {
         }),
         renderInitialScreen(),
         renderTheme(colorScheme),
+        Permissions.askAsync(Permissions.NOTIFICATIONS),
       ])
       const route = result[1]
       const colorTheme = result[2]
-      if (route && colorTheme) {
+      const status = result[3].status
+      if (route && colorTheme && status === 'granted') {
         setInitialScreen(route)
         setTheme(colorTheme)
         setLoading(false)
@@ -38,7 +41,7 @@ export default function App() {
   }
 
   useEffect(() => {
-    loadFont()
+    loadItems()
   }, [])
 
   if (loading) {
