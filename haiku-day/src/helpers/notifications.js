@@ -52,20 +52,15 @@ export const scheduleNotification = async (date) => {
         }
       }
     }
-    const notifs = await Notifications.getAllScheduledNotificationsAsync()
-    console.log(notifs)
   }
 }
 
 export const removeNotificationAndActive = async () => {
-  const notifsAlive = await Notifications.getAllScheduledNotificationsAsync()
-  console.log(notifsAlive)
   const removeItem = await removeHistoryItem()
   if (removeItem.status) {
     const result = await updateHaikuScheduleAll()
     if (result.status) {
-      const notifs = await Notifications.cancelAllScheduledNotificationsAsync()
-      console.log(notifs)
+      await Notifications.cancelAllScheduledNotificationsAsync()
       return true
     } else {
       return false
