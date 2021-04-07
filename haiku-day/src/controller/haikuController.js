@@ -2,6 +2,29 @@ import { openDatabase } from './db'
 
 const sqlite = openDatabase()
 
+export const selectHaikuOne = async (id) => {
+  const db = await sqlite
+  let datas
+  return new Promise((res, rej) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql('SELECT * from haiku WHERE id=?', [id], (tx, result) => {
+          if (result.rows.length > 0) {
+            datas = { status: true, msg: result.rows._array }
+          } else {
+            datas = { status: false, msg: 'Aucun haiku trouvé' }
+          }
+          res(datas)
+        })
+      },
+      (err) => {
+        datas = { status: false, msg: err.message }
+        rej(datas)
+      },
+    )
+  })
+}
+
 export const selectHaikuAll = async () => {
   const db = await sqlite
   let datas

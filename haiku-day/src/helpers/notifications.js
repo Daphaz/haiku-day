@@ -21,7 +21,10 @@ export const scheduleNotification = async (date) => {
               content: {
                 title: 'Vous avez recu un nouveaux Haiku !',
                 body: text,
-                data: haiku,
+                data: {
+                  url: `exp://192.168.0.36:19000/--/haiku/${id}`,
+                  haiku,
+                },
               },
               trigger,
             })
@@ -43,7 +46,9 @@ export const scheduleNotification = async (date) => {
               content: {
                 title: 'Vous avez recu un nouveaux Haiku !',
                 body: text,
-                data: haiku,
+                data: {
+                  url: `exp://192.168.0.36:19000/--/haiku/${id}`,
+                },
               },
               trigger,
             })
