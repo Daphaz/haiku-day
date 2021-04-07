@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { timeFormat } from '~/helpers/dateFormated'
-import { getMode, removeMode } from '../../helpers/constants'
+import { getMode, removeMode } from '~/helpers/constants'
+import { removeNotificationAndActive } from '../../helpers/notifications'
 
 import Title from '~/components/Title'
 import Btn from '~/components/Btn'
@@ -35,7 +36,8 @@ const HomePage = ({ navigation, route }) => {
     navigation.navigate('ManuelPage')
   }
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
+    await removeNotificationAndActive()
     removeMode()
     setMode({ mode: false, date: '' })
   }

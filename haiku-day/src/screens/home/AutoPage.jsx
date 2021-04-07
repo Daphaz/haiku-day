@@ -4,11 +4,12 @@ import { View, Text, StyleSheet } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { timeFormat } from '~/helpers/dateFormated'
-import { saveAutoMode } from '../../helpers/constants'
+import { saveAutoMode } from '~/helpers/constants'
+import { scheduleNotification } from '../../helpers/notifications'
 
 import ReturnBtn from '~/components/ReturnBtn'
-import Btn from '../../components/Btn'
-import Title from '../../components/Title'
+import Btn from '~/components/Btn'
+import Title from '~/components/Title'
 
 const AutoPage = ({ navigation }) => {
   const { colors } = useTheme()
@@ -27,6 +28,7 @@ const AutoPage = ({ navigation }) => {
 
   const onSubmit = () => {
     saveAutoMode(Date.parse(date).toString())
+    scheduleNotification(date)
     navigation.navigate('HomePage', true)
   }
 

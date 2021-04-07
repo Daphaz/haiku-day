@@ -25,15 +25,42 @@ export const selectHaikuAll = async () => {
   })
 }
 
-export const updateHaikuSchedule = async (id, schedule) => {
+export const updateHaikuSchedule = async (id, schedule, schedule_date) => {
   const db = await sqlite
   let datas
   return new Promise((res, rej) => {
     db.transaction(
       (tx) => {
-        tx.executeSql('UPDATE haiku SET schedule=? WHERE id=?', [schedule, id], (tx, result) => {
-          if (result.rows.length > 0) {
-            datas = { status: true, msg: 'Haiku schedule update' }
+        tx.executeSql(
+          'UPDATE haiku SET schedule=?,schedule_date=? WHERE id=?',
+          [schedule, schedule_date, id],
+          (tx, result) => {
+            if (result.rowsAffected > 0) {
+              datas = { status: true, msg: 'sucess update' }
+            } else {
+              datas = { status: false, msg: 'Un probleme est survenue, veuillez réessayer' }
+            }
+            res(datas)
+          },
+        )
+      },
+      (err) => {
+        datas = { status: false, msg: err, func: 'updateHaikuSchedule' }
+        rej(datas)
+      },
+    )
+  })
+}
+
+export const updateHaikuScheduleAll = async () => {
+  const db = await sqlite
+  let datas
+  return new Promise((res, rej) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql('UPDATE haiku SET schedule=?,schedule_date=?', ['disable', null], (tx, result) => {
+          if (result.rowsAffected > 0) {
+            datas = { status: true, msg: 'sucess update' }
           } else {
             datas = { status: false, msg: 'Un probleme est survenue, veuillez réessayer' }
           }
