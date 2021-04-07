@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { createStackNavigator } from '@react-navigation/stack'
 import NavigationTab from './src/Tabs'
 import Onboarding from './src/screens/onboard'
+import Haiku from './src/screens/haiku'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -16,6 +17,7 @@ const Navigation = ({ initialScreen, setTheme, theme }) => {
     >
       <Screen name="Home">{(props) => <NavigationTab {...props} setTheme={setTheme} theme={theme} />}</Screen>
       <Screen name="Onboarding" component={Onboarding} />
+      <Screen name="Haiku" component={Haiku} />
     </Navigator>
   )
 }

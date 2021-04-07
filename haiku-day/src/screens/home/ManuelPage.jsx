@@ -22,7 +22,18 @@ const ManuelPage = () => {
 
   const loadItems = async () => {
     const haikus = await selectHaikuAll()
-    setItems(haikus)
+    if (haikus.status) {
+      setItems(haikus.msg)
+    } else {
+      setItems([
+        {
+          id: 1,
+          text: 'Une erreur est survenue, veuillez réessayer',
+          date: '',
+          author: '',
+        },
+      ])
+    }
   }
 
   useEffect(() => {
