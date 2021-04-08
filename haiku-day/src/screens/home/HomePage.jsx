@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import { useTheme } from '@react-navigation/native'
 import { timeFormat } from '~/helpers/dateFormated'
-import { getMode, removeMode } from '~/helpers/constants'
-import { removeNotificationAndActive } from '../../helpers/notifications'
+import HomeLogic from './HomeLogic'
 
 import Title from '~/components/Title'
 import Btn from '~/components/Btn'
@@ -12,35 +10,7 @@ import Btn from '~/components/Btn'
 const { width } = Dimensions.get('window')
 
 const HomePage = ({ navigation, route }) => {
-  const { colors } = useTheme()
-  const [mode, setMode] = useState({ mode: false, date: '' })
-
-  const loadMode = async () => {
-    try {
-      const item = await getMode()
-      setMode(item)
-    } catch (e) {
-      setMode(false)
-    }
-  }
-
-  useEffect(() => {
-    loadMode()
-  }, [route.params])
-
-  const handleClickAuto = () => {
-    navigation.navigate('AutoPage')
-  }
-
-  const handleClickManuel = () => {
-    navigation.navigate('ManuelPage')
-  }
-
-  const handleRemove = async () => {
-    await removeNotificationAndActive()
-    removeMode()
-    setMode({ mode: false, date: '' })
-  }
+  const { colors, handleClickAuto, handleClickManuel, handleRemove, mode } = HomeLogic(navigation, route)
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
