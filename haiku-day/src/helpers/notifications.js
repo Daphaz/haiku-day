@@ -13,7 +13,7 @@ export const scheduleNotification = async (date) => {
         const { id, text, date: dataH, author } = haiku
         const uptHaiku = await updateHaikuSchedule(id, 'active', currentDate)
         if (uptHaiku.status) {
-          const item = [id, text, dataH, author]
+          const item = [id, text, dataH, author, currentDate]
           const addHistory = await addHistoryItem(item)
           if (addHistory.status) {
             const trigger = currentDate
@@ -38,7 +38,7 @@ export const scheduleNotification = async (date) => {
         const { id, text, date: dataH, author } = haiku
         const uptHaiku = await updateHaikuSchedule(id, 'active', currentDate)
         if (uptHaiku.status) {
-          const item = [id, text, dataH, author]
+          const item = [id, text, dataH, author, currentDate]
           const addHistory = await addHistoryItem(item)
           if (addHistory.status) {
             const trigger = currentDate
