@@ -49,7 +49,7 @@ const Haiku = ({ route, navigation }) => {
               </View>
             </View>
             <View style={styles.footer}>
-              <Btn primary colors={colors} text="home" nomargin onClick={() => navigation.navigate('Home')} />
+              <Btn primary colors={colors} text="retour" nomargin onClick={() => navigation.navigate('Home')} />
             </View>
           </ImageBackground>
         )}
