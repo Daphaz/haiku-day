@@ -22,7 +22,7 @@ export const scheduleNotification = async (date) => {
                 title: 'Vous avez recu un nouveaux Haiku !',
                 body: text,
                 data: {
-                  url: `exp://192.168.0.36:19000/--/haiku/${id}`,
+                  url: `haikuday://haiku/${id}`,
                   haiku,
                 },
               },
