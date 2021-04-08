@@ -9,7 +9,7 @@ import { DefaultTheme, DarkTheme } from './src/theme'
 import Navigation from './Navigation'
 import { renderInitialScreen, renderTheme } from './src/helpers/constants'
 
-const prefix = 'exp://192.168.0.36:19000/--'
+const prefix = 'haikuday://'
 
 export default function App() {
   const colorScheme = useColorScheme()
