@@ -31,6 +31,8 @@
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "description": "one haiku per day  in automation with schedule notification",
+    "githubUrl": "https://github.com/Daphaz/haiku-day"
   }
 }
