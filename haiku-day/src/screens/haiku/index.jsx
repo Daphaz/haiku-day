@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, StyleSheet, ActivityIndicator, ImageBackground, Dimensions } from 'react-native'
-import { useTheme } from '@react-navigation/native'
-import { selectHaikuOne } from '~/controller/haikuController'
+import { View, Text, StyleSheet, ImageBackground, Dimensions } from 'react-native'
+import Logic from './Logic'
 import { images } from '../../data/images'
 
 import Btn from '~/components/Btn'
@@ -10,58 +9,30 @@ import Btn from '~/components/Btn'
 const { width } = Dimensions.get('window')
 
 const Haiku = ({ route, navigation }) => {
-  const [item, setItem] = useState(null)
-  const { colors } = useTheme()
-  if (route.params.itemId) {
-    const loadItem = async () => {
-      const haiku = await selectHaikuOne(route.params.itemId)
-      if (haiku.status) {
-        setItem(haiku.msg[0])
-      } else {
-        setItem([
-          {
-            id: 1,
-            text: 'Une erreur est survenue, veuillez réessayer',
-            date: '',
-            author: '',
-          },
-        ])
-      }
-    }
+  const { colors, item } = Logic(route)
 
-    useEffect(() => {
-      loadItem()
-    }, [])
-
-    return (
-      <>
-        {item !== null && (
-          <ImageBackground source={images[route.params.itemId - 1].src} style={styles.image}>
-            <View style={styles.container}>
-              <View style={styles.content}>
-                <Text style={styles.haikuText}>{item.text}</Text>
-                <View style={styles.infos}>
-                  <View style={styles.bgInfos}>
-                    <Text style={styles.haikuDate}>{item.date}</Text>
-                    <Text style={styles.haikuAuthor}>{item.author}</Text>
-                  </View>
+  return (
+    <>
+      {item !== null && (
+        <ImageBackground source={images[route.params.itemId - 1].src} style={styles.image}>
+          <View style={styles.container}>
+            <View style={styles.content}>
+              <Text style={styles.haikuText}>{item.text}</Text>
+              <View style={styles.infos}>
+                <View style={styles.bgInfos}>
+                  <Text style={styles.haikuDate}>{item.date}</Text>
+                  <Text style={styles.haikuAuthor}>{item.author}</Text>
                 </View>
               </View>
             </View>
-            <View style={styles.footer}>
-              <Btn primary colors={colors} text="retour" nomargin onClick={() => navigation.navigate('Home')} />
-            </View>
-          </ImageBackground>
-        )}
-      </>
-    )
-  } else {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator />
-      </View>
-    )
-  }
+          </View>
+          <View style={styles.footer}>
+            <Btn primary colors={colors} text="retour" nomargin onClick={() => navigation.navigate('Home')} />
+          </View>
+        </ImageBackground>
+      )}
+    </>
+  )
 }
 
 Haiku.propTypes = {
