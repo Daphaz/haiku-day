@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, StyleSheet, Switch } from 'react-native'
+import { View, StyleSheet, Switch, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { prefix } from '~/helpers/constants'
 import Logic from './Logic'
+import Logo from '~/assets/images/logo.png'
 
 export const HeaderLeft = () => {
-  const { colors } = Logic()
   return (
     <View style={styles.headerLeft}>
-      <Text style={{ color: colors.text }}>Logo</Text>
+      <Image source={Logo} width="100%" height="100%" />
     </View>
   )
 }
