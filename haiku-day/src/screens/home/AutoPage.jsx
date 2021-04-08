@@ -1,36 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet } from 'react-native'
-import { useTheme } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { timeFormat } from '~/helpers/dateFormated'
-import { saveAutoMode } from '~/helpers/constants'
-import { scheduleNotification } from '../../helpers/notifications'
+import AutoLogic from './AutoLogic'
 
 import ReturnBtn from '~/components/ReturnBtn'
 import Btn from '~/components/Btn'
 import Title from '~/components/Title'
 
 const AutoPage = ({ navigation }) => {
-  const { colors } = useTheme()
-  const [show, setShow] = useState(false)
-  const [date, setDate] = useState(new Date())
-
-  const onChange = (event, selectedDate) => {
-    setShow(false)
-    const currentDate = selectedDate || date
-    setDate(currentDate)
-  }
-
-  const handleShowTimePiker = () => {
-    setShow(true)
-  }
-
-  const onSubmit = () => {
-    saveAutoMode(Date.parse(date).toString())
-    scheduleNotification(date)
-    navigation.navigate('HomePage', true)
-  }
+  const { colors, date, handleShowTimePiker, onChange, onSubmit, show } = AutoLogic(navigation)
 
   return (
     <View style={styles.container}>
