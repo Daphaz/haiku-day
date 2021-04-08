@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, StyleSheet, ImageBackground, Dimensions } from 'react-native'
 import Logic from './Logic'
-import { images } from '../../data/images'
+import { images } from '~/data/images'
 
 import Btn from '~/components/Btn'
 
