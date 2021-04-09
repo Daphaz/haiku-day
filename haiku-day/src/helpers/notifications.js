@@ -8,6 +8,12 @@ export const scheduleNotification = async (date) => {
     let currentDate = Date.parse(date)
     const now = Date.now()
     const items = haikus.msg
+
+    await Notifications.setNotificationChannelAsync('new-haiku', {
+      name: 'Haiku notifications',
+      importance: Notifications.AndroidImportance.HIGH,
+    })
+
     if (currentDate > now) {
       for (let haiku of items) {
         const { id, text, date: dataH, author } = haiku
@@ -16,17 +22,19 @@ export const scheduleNotification = async (date) => {
           const item = [id, text, dataH, author, currentDate]
           const addHistory = await addHistoryItem(item)
           if (addHistory.status) {
-            const trigger = currentDate
+            const url = `haikuday://app/haiku/${id}`
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Vous avez recu un nouveaux Haiku !',
                 body: text,
                 data: {
-                  url: `haikuday://haiku/${id}`,
-                  haiku,
+                  url,
                 },
               },
-              trigger,
+              trigger: {
+                date: currentDate,
+                channelId: 'new-haiku',
+              },
             })
             currentDate = currentDate + 60 * 60 * 24 * 1000
           }
@@ -41,16 +49,19 @@ export const scheduleNotification = async (date) => {
           const item = [id, text, dataH, author, currentDate]
           const addHistory = await addHistoryItem(item)
           if (addHistory.status) {
-            const trigger = currentDate
+            const url = `haikuday://app/haiku/${id}`
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Vous avez recu un nouveaux Haiku !',
                 body: text,
                 data: {
-                  url: `exp://192.168.0.36:19000/--/haiku/${id}`,
+                  url,
                 },
               },
-              trigger,
+              trigger: {
+                date: currentDate,
+                channelId: 'new-haiku',
+              },
             })
             currentDate = currentDate + 60 * 60 * 24 * 1000
           }

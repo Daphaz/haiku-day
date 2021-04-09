@@ -9,8 +9,6 @@ import { DefaultTheme, DarkTheme } from './src/theme'
 import Navigation from './Navigation'
 import { renderInitialScreen, renderTheme } from './src/helpers/constants'
 
-const prefix = 'haikuday://'
-
 export default function App() {
   const colorScheme = useColorScheme()
   const [loading, setLoading] = useState(true)
@@ -59,13 +57,13 @@ export default function App() {
   }, [lastNotificationResponse])
 
   const linking = {
-    prefixes: [prefix],
+    prefixes: ['haikuday://app'],
     config: {
       Home: 'home',
       Haiku: {
         path: 'haiku/:itemId',
-        params: {
-          itemId: null,
+        parse: {
+          itemId: (itemId) => `${itemId}`,
         },
       },
     },

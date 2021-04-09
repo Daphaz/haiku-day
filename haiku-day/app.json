@@ -19,18 +19,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "userInterfaceStyle": "light"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#E3D7EA"
       },
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "userInterfaceStyle": "dark",
+      "package": "com.daphaz.haikuday"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "description": "one haiku per day  in automation with schedule notification",
+    "githubUrl": "https://github.com/Daphaz/haiku-day"
   }
 }
