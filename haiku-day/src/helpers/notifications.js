@@ -22,7 +22,7 @@ export const scheduleNotification = async (date) => {
           const item = [id, text, dataH, author, currentDate]
           const addHistory = await addHistoryItem(item)
           if (addHistory.status) {
-            const url = `haikuday://haiku/${id}`
+            const url = `haikuday://app/haiku/${id}`
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Vous avez recu un nouveaux Haiku !',
@@ -49,7 +49,7 @@ export const scheduleNotification = async (date) => {
           const item = [id, text, dataH, author, currentDate]
           const addHistory = await addHistoryItem(item)
           if (addHistory.status) {
-            const url = `haikuday://haiku/${id}`
+            const url = `haikuday://app/haiku/${id}`
             await Notifications.scheduleNotificationAsync({
               content: {
                 title: 'Vous avez recu un nouveaux Haiku !',
