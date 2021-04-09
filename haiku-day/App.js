@@ -16,7 +16,6 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [initialScreen, setInitialScreen] = useState('Login')
   const [theme, setTheme] = useState()
-  const lastNotificationResponse = Notifications.useLastNotificationResponse()
 
   const loadItems = async () => {
     try {
@@ -49,14 +48,12 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (
-      lastNotificationResponse &&
-      lastNotificationResponse.notification.request.content.data.url &&
-      lastNotificationResponse.actionIdentifier === Notifications.DEFAULT_ACTION_IDENTIFIER
-    ) {
-      Linking.openURL(lastNotificationResponse.notification.request.content.data.url)
-    }
-  }, [lastNotificationResponse])
+    const subscription = Notifications.addNotificationResponseReceivedListener((response) => {
+      const url = response.notification.request.content.data.url
+      Linking.openURL(url)
+    })
+    return () => subscription.remove()
+  }, [])
 
   const linking = {
     prefixes: [prefix],
@@ -68,6 +65,18 @@ export default function App() {
           itemId: null,
         },
       },
+    },
+    subscribe(listener) {
+      const onReceiveURL = ({ url }) => listener(url)
+      Linking.addEventListener('url', onReceiveURL)
+      const subscription = Notifications.addNotificationResponseReceivedListener((response) => {
+        const url = response.notification.request.content.data.url
+        listener(url)
+      })
+      return () => {
+        Linking.removeEventListener('url', onReceiveURL)
+        subscription.remove()
+      }
     },
   }
 
